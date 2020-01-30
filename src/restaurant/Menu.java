@@ -2,6 +2,7 @@ package restaurant;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Menu {
@@ -14,26 +15,6 @@ public class Menu {
         this.lastUpdate = null;
         this.menuUpdate = new ArrayList<Object>();
     }
-    public LocalDate getTodaysDate(){
-        return this.todaysDate;
-    }
-
-    public LocalDate getLastUpdate() {
-        return this.lastUpdate;
-    }
-
-    public void setTodaysDate(LocalDate todaysDate){
-        this.todaysDate = todaysDate;
-    }
-    public void setLastUpdate(LocalDate lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public void  addItem(MenuItem food){
-        this.menuUpdate.add(food);
-        this.lastUpdate = java.time.LocalDate.now();
-    }
-
 
     public static void main(String[] args) {
 
@@ -50,6 +31,57 @@ public class Menu {
         menu.addItem(salmon);
 
         System.out.println(menu);
+
+        menu.displayOne(salmon);
+
+        System.out.println(menu);
+    } // end main
+
+    public LocalDate getLastUpdate() {
+        return this.lastUpdate;
+    }
+
+    public void setTodaysDate(LocalDate todaysDate){
+        this.todaysDate = todaysDate;
+    }
+    public void setLastUpdate(LocalDate lastUpdate) {
+
+        this.lastUpdate = lastUpdate;
+    }
+
+    public void displayOne(Object food){
+        for (Object items : this.menuUpdate){
+            if (items.equals(food)){
+                System.out.println(items);
+            }
+        }
+    }
+
+    public void  addItem(MenuItem food){
+        this.menuUpdate.add(food);
+        this.lastUpdate = java.time.LocalDate.now();
+    }
+
+    public void removeItem(Object removeItem){
+        for (Object foodObject : this.menuUpdate){
+            if (foodObject.equals(removeItem)){
+                this.menuUpdate.remove(foodObject);
+            }
+        }
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Menu menu = (Menu) o;
+        return Objects.equals(menuUpdate, menu.menuUpdate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menuUpdate);
     }
 
     @Override
