@@ -34,7 +34,9 @@ public class Menu {
 
         menu.displayOne(salmon);
 
+        menu.removeItem(carrotCake);
         System.out.println(menu);
+
     } // end main
 
     public LocalDate getLastUpdate() {
@@ -68,8 +70,8 @@ public class Menu {
                 this.menuUpdate.remove(foodObject);
             }
         }
-
     }
+
 
     @Override
     public boolean equals(Object o) {
